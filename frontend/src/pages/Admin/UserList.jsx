@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { FaTrash, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
 import Message from "../../components/Message";
@@ -90,7 +91,7 @@ const UserList = () => {
                           type="text"
                           value={editableUserName}
                           onChange={(e) => setEditableUserName(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          className="w-full p-2 border rounded-lg text-white bg-gray-300"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}
@@ -119,7 +120,7 @@ const UserList = () => {
                           type="text"
                           value={editableUserEmail}
                           onChange={(e) => setEditableUserEmail(e.target.value)}
-                          className="w-full p-2 border rounded-lg"
+                          className="w-full p-2 border rounded-lg text-white bg-gray-300"
                         />
                         <button
                           onClick={() => updateHandler(user._id)}

@@ -3,10 +3,13 @@ import User from "../models/userModel.js";
 import asyncHandler from "./asyncHandler.js";
 
 const authenticate = asyncHandler(async (req, res, next) => {
-    let token;
 
+    // console.log("inside the authenticate");
+    let token;
     // read jwt from the 'jwt' token
     token = req.cookies.jwt;
+    // console.log(req.cookies);
+    // console.log("token in middleware is ", token);
 
     if(token) {
         try {

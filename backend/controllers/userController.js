@@ -1,7 +1,8 @@
 import User from "../models/userModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
-import createToken from "../utils/createToken.js";
+// import createToken from "../utils/createToken.js";
+import generateToken from "../utils/createToken.js";
 
 const createUser = asyncHandler(async (req, res) => {
     const { username, email, password, isAdmin } = req.body;
@@ -48,8 +49,7 @@ const loginUser = asyncHandler(async (req, res) => {
         );
 
         if (isPasswordValid) {
-            createToken(res, existingUser._id);
-
+            generateToken(res, existingUser._id);
             res.status(201).json({
                 _id: existingUser._id,
                 username: existingUser.username,
@@ -63,7 +63,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
 const logoutCurrentUser = asyncHandler(async (req, res) => {
     res.cookie("jwt", "", {
-        httyOnly: true,
+        httpOnly: true,
         expires: new Date(0),
     });
 

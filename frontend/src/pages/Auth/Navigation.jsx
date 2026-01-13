@@ -84,7 +84,7 @@ const Navigation = () => {
                 className="flex items-center transition-transform transform hover:translate-x-2"
               >
                 <AiOutlineShopping className="mr-2 mt-[4px]" size={26} />
-                <span className="nav-item-name">SHOP</span>{" "}
+                <span className="nav-item-name">SHOP  </span>{" "}
               </Link>
 
               <Link to="/cart" className="flex">
