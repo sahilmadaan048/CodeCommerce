@@ -22,6 +22,7 @@ const addProduct = asyncHandler(async (req, res) => {
         }
 
         const product = new Product({ ...req.fields });
+        // console.log(product);
         await product.save();
         res.json(product);
     } catch (error) {
@@ -56,7 +57,7 @@ const updateProductDetails = asyncHandler(async (req, res) => {
             { ...req.fields },
             { new: true }
         );
-
+        console.log(product);
         await product.save();
 
         res.json(product);
@@ -78,9 +79,9 @@ const removeProduct = asyncHandler(async (req, res) => {
 
 const fetchProducts = asyncHandler(async (req, res) => {
     try {
-        const pageSize = 6;
+        const pageSize = 6; // Limits the number of products returned to 6 per request.
 
-        const keyword = req.query.keyword
+        const keyword = req.query.keyword  // Keyword search logic
             ? {
                 name: {
                     $regex: req.query.keyword,
@@ -89,9 +90,25 @@ const fetchProducts = asyncHandler(async (req, res) => {
             }
             : {};
 
-        const count = await Product.countDocuments({ ...keyword });
+            /**
+             * If user sends:  /api/products?keyword=iphone
+             * 
+             * Then keyword becomes:
+             * {
+                name: { $regex: "iphone", $options: "i" }
+                }
+
+             * else fetch all products
+             */
+
+        // used for pagination
+        const count = await Product.countDocuments({ ...keyword });  // Counts how many products match the filter.
+
+        // find products matching keyword
+        // returns only first 6 results
         const products = await Product.find({ ...keyword }).limit(pageSize);
 
+        // return json response
         res.json({
             products,
             page: 1,
@@ -124,7 +141,7 @@ const fetchAllProducts = asyncHandler(async (req, res) => {
         const products = await Product.find({})  // to get alll documents
             .populate("category")  // instead of the objectId it will return the actual Object in the response
             .limit(12)  // limits the number of prodicts returned to be 12
-            .sort({ createAt: -1 });  // -1 means newest first (descendibg order mei sort kardo inko)
+            .sort({ createAt: -1 });  // -1 means newest first (descending order mei sort kardo inko)
 
         res.json(products);
     } catch (error) {

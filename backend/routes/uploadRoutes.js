@@ -1,17 +1,18 @@
-import path from "path";  // for handlinf file paths and extensions
+import path from "path";  // for handling file paths and extensions
 import express from "express";
-import multer from "multer";  // for ahndling fiole uploads
+import multer from "multer";  // for handling file uploads
 
 const router = express.Router(); // new express router instance
 
 
-// teeling multer where and how to save the uploaded files
+// telling multer where and how to save the uploaded files
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, "uploads/");
     },
 
     filename: (req, file, cb) => {
+        // extension name
         const extname = path.extname(file.originalname);
         cb(null, `${file.fieldname}-${Date.now()}${extname}`);
     },
@@ -49,6 +50,7 @@ router.post("/", (req, res) => {
             res.status(400).send({ message: "No image file provided" });
         }
     });
+    // res.send("hello duniya")
 });
 
 export default router;
