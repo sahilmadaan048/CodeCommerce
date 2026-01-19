@@ -24,7 +24,7 @@ const ProductUpdate = () => {
   const [image, setImage] = useState(productData?.image || "");
   const [name, setName] = useState(productData?.name || "");
   const [description, setDescription] = useState(
-    productData?.description || ""
+    productData?.description || "",
   );
   const [price, setPrice] = useState(productData?.price || "");
   const [category, setCategory] = useState(productData?.category || "");
@@ -91,25 +91,20 @@ const ProductUpdate = () => {
       formData.append("brand", brand);
       formData.append("countInStock", stock);
 
-      // update product using the RTK query mutation
-      //   const data = await updateProduct({ productId: params._id, formData });
-      const data = await updateProduct({ productId: id, formData });
+      await updateProduct({
+        productId: id,
+        formData,
+      }).unwrap();
 
-      if (data?.error) {
-        toast.error(data.error, {
-          position: "top-right",
-          autoClose: 2000,
-        });
-      } else {
-        toast.success(`Product successfully updated`, {
-          position: "top-right",
-          autoClose: 2000,
-        });
-        navigate("/admin/allproductslist");
-      }
+      toast.success("Product successfully updated", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+
+      navigate("/admin/allproductslist");
     } catch (err) {
       console.log(err);
-      toast.error("Product update failed. Try again.", {
+      toast.error(err?.data?.message || "Product update failed. Try again.", {
         position: "top-right",
         autoClose: 2000,
       });
@@ -119,7 +114,7 @@ const ProductUpdate = () => {
   const handleDelete = async () => {
     try {
       let answer = window.confirm(
-        "Are you sure you want to delete this product?"
+        "Are you sure you want to delete this product?",
       );
       if (!answer) return;
       //   const { data } = await deleteProduct(params._id);
