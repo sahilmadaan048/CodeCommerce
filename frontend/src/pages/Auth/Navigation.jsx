@@ -18,6 +18,7 @@ import FavoritesCount from "../Products/FavoritesCount";
 
 const Navigation = () => {
   const { userInfo } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
@@ -71,6 +72,16 @@ const Navigation = () => {
             <AiOutlineShoppingCart className="mt-[3rem] mr-2" size={26} />
             <span className="hidden nav-item-name mt-[3rem]">Cart</span>{" "}
           </div>
+
+          <div className="absolute top-9">
+            {cartItems.length > 0 && (
+              <span>
+                <span className="px-1 py-0 text-sm text-white bg-pink-500 rounded-full">
+                  {cartItems.reduce((a, c) => a + c.qty, 0)}
+                </span>
+              </span>
+            )}
+          </div>
         </Link>
 
         <Link to="/favorite" className="flex relative">
@@ -116,11 +127,11 @@ const Navigation = () => {
 
         {dropdownOpen && userInfo && (
           <ul
-            className={`absolute right-0 mt-2 mr-14 space-y-2 bg-white text-gray-600 ${
+            className={`absolute right-0 mt-2 mr-14 space-y-2 bg-black text-white hover:text-black hover:bg-white ${
               !userInfo.isAdmin ? "-top-20" : "-top-80"
             } `}
           >
-            {userInfo.isAdmin && (
+            {(userInfo.isAdmin && !showSidebar) && (
               <>
                 <li>
                   <Link

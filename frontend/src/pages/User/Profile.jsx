@@ -57,7 +57,7 @@ const Profile = () => {
               <input
                 type="text"
                 placeholder="Enter name"
-                className="form-input p-4 rounded-sm w-full"
+                className="w-full p-4 rounded-sm bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 value={username}
                 onChange={(e) => setUserName(e.target.value)}
               />
@@ -68,7 +68,7 @@ const Profile = () => {
               <input
                 type="email"
                 placeholder="Enter email"
-                className="form-input p-4 rounded-sm w-full"
+                className="w-full p-4 rounded-sm bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -79,7 +79,7 @@ const Profile = () => {
               <input
                 type="password"
                 placeholder="Enter password"
-                className="form-input p-4 rounded-sm w-full"
+                className="w-full p-4 rounded-sm bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -90,7 +90,7 @@ const Profile = () => {
               <input
                 type="password"
                 placeholder="Confirm password"
-                className="form-input p-4 rounded-sm w-full"
+                className="w-full p-4 rounded-sm bg-black text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-600"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
