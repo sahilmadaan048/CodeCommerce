@@ -1,6 +1,7 @@
 import Order from "../models/orderModel.js";
 import Product from "../models/productModel.js";
 
+
 // Utility Function
 function calcPrices(orderItems) {
     const itemsPrice = orderItems.reduce(
@@ -66,8 +67,8 @@ const createOrder = async (req, res) => {
             shippingAddress,
             paymentMethod,
             itemsPrice,
-            taxPrice,
             shippingPrice,
+            taxPrice,
             totalPrice,
         });
 
@@ -121,7 +122,7 @@ const calcualteTotalSalesByDate = async (req, res) => {
             {
                 $match: {
                     isPaid: true,
-                },
+                },   
             },
             {
                 $group: {
@@ -160,6 +161,8 @@ const findOrderById = async (req, res) => {
 const markOrderAsPaid = async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
+        // console.log("is id: ", req.params.id);
+        console.log("order is: ", order);
 
         if (order) {
             order.isPaid = true;
