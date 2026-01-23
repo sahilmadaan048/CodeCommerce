@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://codecommerce.vercel.app"
+    "https://code-commerce-1nzh.vercel.app"
   ],
   credentials: true,
 }));
